@@ -4,6 +4,27 @@
         <title>Custom Video Broadcaster</title>
     </head>
     <body>
-        <h1>Welcome to Custom Video Broadcaster</h1>
+        <div>
+            <div class = "button">
+                <button onclick="">List Devices</button>
+                <button onclick="">Start Stream</button>
+                <button onclick="">Stop Stream</button>    
+            </div>
+
+            <div>
+                <label for ="camera">Choose Camera</label>
+                <select id = "camera"></select>
+                
+                <label for = "fps"> FPS</label>
+                <input type="number" id="fps" value="15" min="1" max="60">
+                
+                <label>Blur Strength (odd number)</label>
+                <input type="range" id="blur" value="10" min="1" max="52">
+
+                <label for ="background"></label>
+                <select id = "camera"></select>
+            </div>
+        </div>
+        
     </body>
 </html>
