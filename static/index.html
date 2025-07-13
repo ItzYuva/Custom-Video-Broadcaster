@@ -2,28 +2,95 @@
 <html>
     <head>
         <title>Custom Video Broadcaster</title>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #000000;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #000;
+                background: url('./static/bgimage.png') no-repeat center center fixed;
+                background-size: cover;
+            }
+
+            button {
+                padding: 10px 20px;
+                border: none;
+                color: #fff;
+                background: #3e3e3e;
+                border-radius: 5px;
+                cursor: pointer;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            button:hover {
+                background: #727272;
+            }
+
+            .container {
+                width: 70%;
+                max-width: 750px;
+                text-align: center;
+                background-color: rgba(94, 93, 93, 0.544);
+                padding: 20px;
+                border-radius: 10px;
+                position: relative;
+
+                box-shadow: 0 10px 20px rgba(188, 188, 188, 0.407),
+                            0 6px 6px rgba(126, 122, 122, 0.225);
+                
+                border: 6px #ffffff;
+
+                background: linear-gradient(145deg, #dedddd, #b8b7b7);
+            }
+
+            .controls {
+                display: flex;
+                margin: 20px 0;
+                justify-content: space-between;
+            }
+
+            .button, .inputs {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+        </style>
     </head>
     <body>
-        <div>
-            <div class = "button">
-                <button onclick="">List Devices</button>
-                <button onclick="">Start Stream</button>
-                <button onclick="">Stop Stream</button>    
+        <div class = "container">
+            <div class = "controls">
+                <div class = "button">
+                    <button onclick="">List Devices</button>
+                    <button onclick="">Start Stream</button>
+                    <button onclick="">Stop Stream</button>    
+                </div>
+
+                <div class = "inputs">
+                    <label for ="camera">Choose Camera</label>
+                    <select id = "camera"></select>
+                    
+                    <label for = "fps"> FPS</label>
+                    <input type="number" id="fps" value="15" min="1" max="60">
+                    
+                    <label>Blur Strength (odd number)</label>
+                    <input type="range" id="blur" value="10" min="1" max="52">
+
+                    <label for ="background"> Background</label>
+                    <select id = "background">
+                        <option value="none">No background</option>
+                        <option value="blur">Blur</option>
+                        <option value="default">Default</option>
+                    </select>
+                </div>
             </div>
 
-            <div>
-                <label for ="camera">Choose Camera</label>
-                <select id = "camera"></select>
-                
-                <label for = "fps"> FPS</label>
-                <input type="number" id="fps" value="15" min="1" max="60">
-                
-                <label>Blur Strength (odd number)</label>
-                <input type="range" id="blur" value="10" min="1" max="52">
-
-                <label for ="background"></label>
-                <select id = "camera"></select>
-            </div>
         </div>
         
     </body>
