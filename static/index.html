@@ -14,7 +14,7 @@
                 justify-content: center;
                 align-items: center;
                 color: #000;
-                background: url('./static/bgimage.png') no-repeat center center fixed;
+                /* background: url('./static/bgimage.png') no-repeat center center fixed; */
                 background-size: cover;
             }
 
@@ -31,6 +31,8 @@
             button:hover {
                 background: #727272;
             }
+
+            h1 {color: #3e3e3e;}
 
             .container {
                 width: 70%;
@@ -61,10 +63,26 @@
                 gap: 15px;
                 margin-bottom: 20px;
             }
+
+            select, input[type="range"], input[type="number"] {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            #status{
+                margin-top: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.8);
+                padding: 10px;
+            }
+
         </style>
     </head>
     <body>
         <div class = "container">
+            <h1>Custom Video Broadcaster</h1>
             <div class = "controls">
                 <div class = "button">
                     <button onclick="">List Devices</button>
@@ -90,7 +108,7 @@
                     </select>
                 </div>
             </div>
-
+            <div id = "status"> Status : Waiting for action... </div>
         </div>
         
     </body>
