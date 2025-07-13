@@ -85,9 +85,9 @@
             <h1>Custom Video Broadcaster</h1>
             <div class = "controls">
                 <div class = "button">
-                    <button onclick="">List Devices</button>
-                    <button onclick="">Start Stream</button>
-                    <button onclick="">Stop Stream</button>    
+                    <button onclick="getDevices()">List Devices</button>
+                    <button onclick="startStream()">Start Stream</button>
+                    <button onclick="stopStream()">Stop Stream</button>    
                 </div>
 
                 <div class = "inputs">
@@ -110,6 +110,20 @@
             </div>
             <div id = "status"> Status : Waiting for action... </div>
         </div>
+
+        <script>
+            function getDevices() {
+                fetch('/devices')
+                .then(response => response.json())
+                .then(data =>{
+                    const select = document.getElementById('camera');
+                    select.innerHTML = '';
+                    data.forEach(device => {
+                        select.innerHTML += `<option value="${device.id}">${device.name}</option>`; 
+                    });
+                });
+            }
+        </script>
         
     </body>
 </html>
