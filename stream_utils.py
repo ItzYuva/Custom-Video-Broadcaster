@@ -10,8 +10,7 @@ class Streaming():
         for i in range(5):
             cap = cv2.VideoCapture(i)
             if cap.isOpened():
-                devices.append({})
-                
+                devices.append({"id": i, "name": f"Camera {i}"})       
         return devices
     
     
