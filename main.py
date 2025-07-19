@@ -15,6 +15,13 @@ streaming = Streaming()
 def serve_ui():
     return FileResponse("static/index.html")
 
+@app.get("/start")
+def start_stream(
+    source: str = Query("0"), fps: int = Query(30),
+    blur: int = Query(0), background: str = Query("None")   
+):
+    return streaming.list_availavle_devices()
+
 @app.get("/devices")
 def devices():
     return streaming.list_availavle_devices()
