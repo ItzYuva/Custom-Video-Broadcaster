@@ -3,9 +3,13 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from stream_utils import Streaming
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+streaming = Streaming()
 
 @app.get("/")
 def serve_ui():
@@ -13,8 +17,7 @@ def serve_ui():
 
 @app.get("/devices")
 def devices():
-    pass
-    return 0
+    return streaming.list_availavle_devices()
 
 if __name__ == "__main__":
     uvicorn.run(app, host = "0.0.0.0", port = 8000) 
