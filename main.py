@@ -21,6 +21,9 @@ def start_stream(
     source: str = Query("0"), fps: int = Query(15),
     blur_strength: int = Query(21), background: str = Query("None")
 ):
+    streaming.update_streaming_config(
+        in_source=source, out_source=None, fps=fps, blur_strength=blur_strength, background=background
+    )
     return 0
 
 @app.get("/devices")
