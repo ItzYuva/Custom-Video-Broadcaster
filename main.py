@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from stream_utils import Streaming
+from fastapi import Query
 
 app = FastAPI()
 
@@ -17,14 +18,14 @@ def serve_ui():
 
 @app.get("/start")
 def start_stream(
-    source: str = Query("0"), fps: int = Query(30),
-    blur: int = Query(0), background: str = Query("None")   
+    source: str = Query("0"), fps: int = Query(15),
+    blur_strength: int = Query(21), background: str = Query("None")
 ):
-    return streaming.list_availavle_devices()
+    return 0
 
 @app.get("/devices")
 def devices():
-    return streaming.list_availavle_devices()
+    return streaming.list_available_devices()
 
 if __name__ == "__main__":
     uvicorn.run(app, host = "0.0.0.0", port = 8000) 
