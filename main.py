@@ -26,13 +26,17 @@ def start_stream(
         in_source=source, out_source=None, fps=fps, blur_strength=blur_strength, background=background
     )
 
-    if streaming.running:
+    if streaming.running:   
         return JSONResponse(content={"message": "Streaming is already running."}, status_code=400)
     
     stream_thread = threading.Thread(target=streaming.stream_video, args=())
     stream_thread.start()
 
     return {"message": f"Streaming started from source {source} at {fps} FPS and blur strength : {blur_strength}."}
+
+@app.get("/stop")
+def stop_stream():
+    return streaming.update_running_status()
 
 @app.get("/devices")
 def devices():
