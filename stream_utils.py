@@ -1,15 +1,20 @@
 import cv2
 import pyvirtualcam
+import torch
+
+from engine import CustomerSegmentationWithYolo
 
 
-class Streaming():
+class Streaming(CustomerSegmentationWithYolo):
     def __init__(self, in_source=None, out_source=None, fps=None, blur_strength=None, background="none"):
+        super().__init__(erode_size=5, erode_intensity=2)
         self.input_source = in_source
         self.output_source = out_source
         self.fps = fps
         self.blur_strength = blur_strength
         self.background = background
         self.running = False
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
     def update_streaming_config(self, in_source=None, out_source=None, fps=None, blur_strength=None, background="none"):
         self.input_source = in_source
@@ -17,6 +22,9 @@ class Streaming():
         self.fps = fps
         self.blur_strength = blur_strength
         self.background = background
+
+    def update_running_status(self, running_status = False):
+        self.running = running_status
 
     def stream_video(self):
         self.running = True
@@ -50,8 +58,16 @@ class Streaming():
                     break
 
                 if frame_idx % frame_interval == 0:
-                    result = 0
-                    mask = 0
+                    results = self.model.predict(source = frame, save=False, save_txt=False, stream = True, retina_masks=True, verbose=False, device=self.device)
+                    mask = self.generate_mask_from_result(results)
+                    
+                    if mask is not None:
+                        if self.background == "blur":
+                            result_frame = self.apply_blur_with_mask(frame, mask, blur_strength=self.blur_strength)
+                        elif self.background == "none":
+                            result_frame = self.apply_black_background(frame, mask)
+                        elif self.background == "default":
+                            result_frame = self.apply_custom_background(frame, mask)
 
                     result_frame = 0
 
