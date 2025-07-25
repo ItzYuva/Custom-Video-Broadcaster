@@ -11,6 +11,8 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+stream_thread = None
+
 streaming = Streaming()
 
 @app.get("/")
