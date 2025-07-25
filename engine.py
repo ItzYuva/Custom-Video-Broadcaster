@@ -56,3 +56,11 @@ class CustomerSegmentationWithYolo():
         #apply the mask
         result_frame = np.where(mask[:, :, np.newaxis] == 255, black_background, frame)
         return result_frame
+    
+    def apply_custom_background(self, frame, mask):
+        # load the bg image
+        background_image = cv2.resize(self.background_image, (frame.shape[1], frame.shape[0]))
+
+        # apply the mask
+        result_frame = np.where(mask[:, :, np.newaxis] == 255, background_image, frame)
+        return result_frame
