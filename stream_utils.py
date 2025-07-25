@@ -6,7 +6,7 @@ from engine import CustomerSegmentationWithYolo
 
 
 class Streaming(CustomerSegmentationWithYolo):
-    def __init__(self, in_source=None, out_source=None, fps=None, blur_strength=None, background="none"):
+    def __init__(self, in_source=None, out_source=None, fps=None, blur_strength=None, cam_fps = 15, background="none"):
         super().__init__(erode_size=5, erode_intensity=2)
         self.input_source = in_source
         self.output_source = out_source
@@ -14,6 +14,7 @@ class Streaming(CustomerSegmentationWithYolo):
         self.blur_strength = blur_strength
         self.background = background
         self.running = False
+        self.original_fps = cam_fps
         self.device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 
     def update_streaming_config(self, in_source=None, out_source=None, fps=None, blur_strength=None, background="none"):
